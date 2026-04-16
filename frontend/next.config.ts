@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/api/((?!auth(?:/|$)).+)',
-        destination: `${apiUrl}/api/:path*`,
+        destination: `${apiUrl}/api/$1`,
       },
     ];
   },

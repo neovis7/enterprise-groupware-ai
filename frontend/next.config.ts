@@ -1,12 +1,12 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  // API 요청을 백엔드 FastAPI 서버로 프록시
+  // API 요청을 백엔드 FastAPI 서버로 프록시 (/api/auth/*는 NextAuth가 처리하므로 제외)
   async rewrites() {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000';
     return [
       {
-        source: '/api/:path*',
+        source: '/api/((?!auth(?:/|$)).+)',
         destination: `${apiUrl}/api/:path*`,
       },
     ];

@@ -31,16 +31,16 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           if (!response.ok) return null;
 
           const json = await response.json();
-          if (!json?.data) return null;
+          if (!json?.access_token || !json?.user) return null;
 
-          const { accessToken, user } = json.data;
+          const { access_token: accessToken, user } = json;
           return {
             id: user.id,
             name: user.name,
             email: user.email,
             role: user.role,
-            departmentId: user.departmentId,
-            avatarUrl: user.avatarUrl,
+            departmentId: user.department_id,
+            avatarUrl: user.avatar_url,
             accessToken,
           };
         } catch {

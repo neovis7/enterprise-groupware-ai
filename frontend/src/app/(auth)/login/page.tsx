@@ -20,8 +20,14 @@ function LoginForm() {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<LoginRequest>();
+
+  const fillTestAccount = () => {
+    setValue('email', 'admin@company.com');
+    setValue('password', 'admin1234!');
+  };
 
   const onSubmit = async (data: LoginRequest) => {
     setAuthError(null);
@@ -143,6 +149,21 @@ function LoginForm() {
             {isSubmitting ? '로그인 중...' : '로그인'}
           </button>
         </form>
+
+        {/* 테스트 계정 */}
+        <div className="rounded-md bg-muted/50 border border-border px-4 py-3">
+          <p className="text-xs text-muted-foreground mb-2 font-medium">테스트 계정</p>
+          <button
+            type="button"
+            onClick={fillTestAccount}
+            className="w-full text-left text-xs text-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
+          >
+            <span className="font-mono">admin@company.com</span>
+            <span className="text-muted-foreground mx-1">/</span>
+            <span className="font-mono">admin1234!</span>
+            <span className="ml-2 text-primary text-[10px] font-semibold uppercase tracking-wide">클릭하여 입력</span>
+          </button>
+        </div>
 
         {/* 구분선 */}
         <div className="relative">

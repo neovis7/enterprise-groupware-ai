@@ -1,0 +1,39 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.egg-info/
+dist/
+build/
+venv/
+.venv/
+env/
+*.egg
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Alembic
+# (keep migration files, exclude local)
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+logs/

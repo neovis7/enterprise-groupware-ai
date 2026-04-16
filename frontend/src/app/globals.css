@@ -1,0 +1,565 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+@custom-variant dark (&:is(.dark *));
+
+/* ==========================================================================
+   Tailwind v4 Theme — shadcn 기본 토큰 + glassmorphism 확장
+
+   shadcn이 사용하는 시맨틱 변수(--primary, --background 등)는 유지하되,
+   그룹웨어 전용 토큰은 --app-* 접두사로 분리하여 충돌을 방지합니다.
+   ========================================================================== */
+
+@theme inline {
+  /* shadcn 시맨틱 색상 매핑 (기존 유지) */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* ==========================================================================
+   :root — 라이트 모드 토큰
+   ========================================================================== */
+
+:root {
+  /* --- shadcn 기본 시맨틱 (라이트) --- */
+  --background: oklch(0.985 0.002 247);
+  --foreground: oklch(0.175 0.02 260);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.175 0.02 260);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.175 0.02 260);
+  --primary: oklch(0.44 0.16 270);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.95 0.01 250);
+  --secondary-foreground: oklch(0.25 0.03 260);
+  --muted: oklch(0.955 0.005 250);
+  --muted-foreground: oklch(0.5 0.02 260);
+  --accent: oklch(0.95 0.01 250);
+  --accent-foreground: oklch(0.25 0.03 260);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.905 0.01 250);
+  --input: oklch(0.905 0.01 250);
+  --ring: oklch(0.44 0.16 270);
+  --chart-1: oklch(0.44 0.16 270);
+  --chart-2: oklch(0.55 0.15 160);
+  --chart-3: oklch(0.65 0.15 50);
+  --chart-4: oklch(0.60 0.20 310);
+  --chart-5: oklch(0.70 0.12 200);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.975 0.005 250);
+  --sidebar-foreground: oklch(0.175 0.02 260);
+  --sidebar-primary: oklch(0.44 0.16 270);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.95 0.01 250);
+  --sidebar-accent-foreground: oklch(0.25 0.03 260);
+  --sidebar-border: oklch(0.905 0.01 250);
+  --sidebar-ring: oklch(0.44 0.16 270);
+
+  /* --- 그룹웨어 전용 토큰 (--app-*) --- */
+
+  /* 브랜드 컬러 */
+  --app-brand-primary: #3B5BDB;
+  --app-brand-primary-light: #5C7CFA;
+  --app-brand-primary-dark: #2B4ACB;
+  --app-brand-secondary: #74C0FC;
+  --app-brand-accent: #FCC419;
+  --app-brand-accent-dark: #F59F00;
+
+  /* 결재 상태 색상 */
+  --app-status-pending: #b45309;
+  --app-status-pending-bg: rgba(245, 158, 11, 0.1);
+  --app-status-pending-border: rgba(245, 158, 11, 0.3);
+  --app-status-approved: #047857;
+  --app-status-approved-bg: rgba(16, 185, 129, 0.1);
+  --app-status-approved-border: rgba(16, 185, 129, 0.3);
+  --app-status-rejected: #dc2626;
+  --app-status-rejected-bg: rgba(239, 68, 68, 0.1);
+  --app-status-rejected-border: rgba(239, 68, 68, 0.3);
+  --app-status-cancelled: #4B5563;
+  --app-status-cancelled-bg: rgba(107, 114, 128, 0.1);
+  --app-status-cancelled-border: rgba(107, 114, 128, 0.3);
+  --app-status-info: #1D4ED8;
+  --app-status-info-bg: rgba(59, 130, 246, 0.1);
+  --app-status-info-border: rgba(59, 130, 246, 0.3);
+
+  /* Glassmorphism */
+  --app-glass-bg: rgba(255, 255, 255, 0.72);
+  --app-glass-bg-subtle: rgba(255, 255, 255, 0.48);
+  --app-glass-border: rgba(255, 255, 255, 0.5);
+  --app-glass-blur: blur(12px);
+  --app-glass-blur-heavy: blur(24px);
+  --app-glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+
+  /* 표면 (Surface) */
+  --app-surface-raised: rgba(255, 255, 255, 0.9);
+  --app-surface-overlay: rgba(255, 255, 255, 0.85);
+  --app-surface-sunken: rgba(0, 0, 0, 0.02);
+
+  /* 타이포그래피 사이즈 */
+  --app-text-h1: 1.875rem;
+  --app-text-h2: 1.5rem;
+  --app-text-h3: 1.25rem;
+  --app-text-h4: 1.125rem;
+  --app-text-body: 0.9375rem;
+  --app-text-caption: 0.8125rem;
+  --app-text-code: 0.875rem;
+  --app-text-overline: 0.6875rem;
+
+  /* 타이포그래피 행간 */
+  --app-leading-h1: 2.25rem;
+  --app-leading-h2: 2rem;
+  --app-leading-h3: 1.75rem;
+  --app-leading-h4: 1.625rem;
+  --app-leading-body: 1.625rem;
+  --app-leading-caption: 1.25rem;
+
+  /* 간격 스케일 */
+  --app-space-xs: 0.25rem;
+  --app-space-sm: 0.5rem;
+  --app-space-md: 1rem;
+  --app-space-lg: 1.5rem;
+  --app-space-xl: 2rem;
+  --app-space-2xl: 3rem;
+  --app-space-3xl: 4rem;
+
+  /* 반경 */
+  --app-radius-sm: 0.375rem;
+  --app-radius-md: 0.5rem;
+  --app-radius-lg: 0.75rem;
+  --app-radius-xl: 1rem;
+  --app-radius-pill: 9999px;
+
+  /* 그림자 */
+  --app-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --app-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --app-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --app-shadow-inner: inset 0 1px 2px rgba(0, 0, 0, 0.06);
+
+  /* 트랜지션 */
+  --app-transition-fast: 120ms ease;
+  --app-transition-normal: 200ms ease;
+  --app-transition-slow: 350ms ease;
+
+  /* Z-index 스케일 */
+  --app-z-dropdown: 50;
+  --app-z-sticky: 100;
+  --app-z-modal: 200;
+  --app-z-toast: 300;
+  --app-z-tooltip: 400;
+
+  /* 폰트 패밀리 */
+  --font-sans: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ==========================================================================
+   .dark — 다크 모드 토큰
+   ========================================================================== */
+
+.dark {
+  /* --- shadcn 기본 시맨틱 (다크) --- */
+  --background: oklch(0.145 0.015 260);
+  --foreground: oklch(0.96 0.005 250);
+  --card: oklch(0.19 0.02 260);
+  --card-foreground: oklch(0.96 0.005 250);
+  --popover: oklch(0.19 0.02 260);
+  --popover-foreground: oklch(0.96 0.005 250);
+  --primary: oklch(0.62 0.18 270);
+  --primary-foreground: oklch(0.145 0.015 260);
+  --secondary: oklch(0.24 0.02 260);
+  --secondary-foreground: oklch(0.92 0.01 250);
+  --muted: oklch(0.24 0.02 260);
+  --muted-foreground: oklch(0.65 0.02 260);
+  --accent: oklch(0.24 0.02 260);
+  --accent-foreground: oklch(0.92 0.01 250);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.62 0.18 270);
+  --chart-1: oklch(0.62 0.18 270);
+  --chart-2: oklch(0.60 0.15 160);
+  --chart-3: oklch(0.70 0.15 50);
+  --chart-4: oklch(0.65 0.20 310);
+  --chart-5: oklch(0.75 0.12 200);
+  --sidebar: oklch(0.17 0.02 260);
+  --sidebar-foreground: oklch(0.96 0.005 250);
+  --sidebar-primary: oklch(0.62 0.18 270);
+  --sidebar-primary-foreground: oklch(0.96 0.005 250);
+  --sidebar-accent: oklch(0.24 0.02 260);
+  --sidebar-accent-foreground: oklch(0.92 0.01 250);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.62 0.18 270);
+
+  /* --- 그룹웨어 전용 토큰 (--app-*) 다크 --- */
+
+  /* 브랜드 컬러 (다크 모드: 밝기 조정) */
+  --app-brand-primary: #5C7CFA;
+  --app-brand-primary-light: #748FFC;
+  --app-brand-primary-dark: #4C6EF5;
+  --app-brand-secondary: #A5D8FF;
+  --app-brand-accent: #FFD43B;
+  --app-brand-accent-dark: #FCC419;
+
+  /* 결재 상태 색상 (다크 모드: 높은 채도) */
+  --app-status-pending: #FBBF24;
+  --app-status-pending-bg: rgba(251, 191, 36, 0.15);
+  --app-status-pending-border: rgba(251, 191, 36, 0.35);
+  --app-status-approved: #34D399;
+  --app-status-approved-bg: rgba(52, 211, 153, 0.15);
+  --app-status-approved-border: rgba(52, 211, 153, 0.35);
+  --app-status-rejected: #F87171;
+  --app-status-rejected-bg: rgba(248, 113, 113, 0.15);
+  --app-status-rejected-border: rgba(248, 113, 113, 0.35);
+  --app-status-cancelled: #9CA3AF;
+  --app-status-cancelled-bg: rgba(156, 163, 175, 0.15);
+  --app-status-cancelled-border: rgba(156, 163, 175, 0.35);
+  --app-status-info: #60A5FA;
+  --app-status-info-bg: rgba(96, 165, 250, 0.15);
+  --app-status-info-border: rgba(96, 165, 250, 0.35);
+
+  /* Glassmorphism (다크) */
+  --app-glass-bg: rgba(25, 30, 50, 0.72);
+  --app-glass-bg-subtle: rgba(25, 30, 50, 0.48);
+  --app-glass-border: rgba(255, 255, 255, 0.08);
+  --app-glass-blur: blur(12px);
+  --app-glass-blur-heavy: blur(24px);
+  --app-glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.32);
+
+  /* 표면 (다크) */
+  --app-surface-raised: rgba(255, 255, 255, 0.06);
+  --app-surface-overlay: rgba(255, 255, 255, 0.04);
+  --app-surface-sunken: rgba(0, 0, 0, 0.2);
+
+  /* 그림자 (다크) */
+  --app-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.24);
+  --app-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.32);
+  --app-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.48);
+  --app-shadow-inner: inset 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+/* prefers-color-scheme 자동 감지 (JS에서 .dark 클래스 미설정 시 fallback) */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --background: oklch(0.145 0.015 260);
+    --foreground: oklch(0.96 0.005 250);
+
+    --app-glass-bg: rgba(25, 30, 50, 0.72);
+    --app-glass-border: rgba(255, 255, 255, 0.08);
+    --app-glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.32);
+    --app-surface-raised: rgba(255, 255, 255, 0.06);
+    --app-surface-overlay: rgba(255, 255, 255, 0.04);
+    --app-surface-sunken: rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* ==========================================================================
+   글로벌 베이스 스타일
+   ========================================================================== */
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply font-sans antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-size: var(--app-text-body);
+    line-height: var(--app-leading-body);
+  }
+
+  /* 스크롤바 스타일링 (webkit) */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: oklch(0.7 0 0 / 30%);
+    border-radius: var(--app-radius-pill);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.5 0 0 / 50%);
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    background: oklch(0.5 0 0 / 30%);
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.6 0 0 / 50%);
+  }
+
+  /* Firefox 스크롤바 */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: oklch(0.7 0 0 / 30%) transparent;
+  }
+
+  /* 텍스트 선택 */
+  ::selection {
+    background: oklch(0.44 0.16 270 / 20%);
+    color: oklch(0.175 0.02 260);
+  }
+
+  .dark ::selection {
+    background: oklch(0.62 0.18 270 / 30%);
+    color: oklch(0.96 0.005 250);
+  }
+
+  /* 포커스 개선 */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+/* ==========================================================================
+   유틸리티 컴포넌트 클래스
+   ========================================================================== */
+
+@layer components {
+  /* Glassmorphism 카드 */
+  .app-glass-card {
+    background: var(--app-glass-bg);
+    backdrop-filter: var(--app-glass-blur);
+    -webkit-backdrop-filter: var(--app-glass-blur);
+    border: 1px solid var(--app-glass-border);
+    border-radius: var(--app-radius-lg);
+    box-shadow: var(--app-glass-shadow);
+  }
+
+  .app-glass-card-subtle {
+    background: var(--app-glass-bg-subtle);
+    backdrop-filter: var(--app-glass-blur);
+    -webkit-backdrop-filter: var(--app-glass-blur);
+    border: 1px solid var(--app-glass-border);
+    border-radius: var(--app-radius-lg);
+  }
+
+  /* 결재 상태 뱃지 */
+  .app-badge-pending {
+    color: var(--app-status-pending);
+    background: var(--app-status-pending-bg);
+    border: 1px solid var(--app-status-pending-border);
+  }
+
+  .app-badge-approved {
+    color: var(--app-status-approved);
+    background: var(--app-status-approved-bg);
+    border: 1px solid var(--app-status-approved-border);
+  }
+
+  .app-badge-rejected {
+    color: var(--app-status-rejected);
+    background: var(--app-status-rejected-bg);
+    border: 1px solid var(--app-status-rejected-border);
+  }
+
+  .app-badge-cancelled {
+    color: var(--app-status-cancelled);
+    background: var(--app-status-cancelled-bg);
+    border: 1px solid var(--app-status-cancelled-border);
+  }
+
+  .app-badge-info {
+    color: var(--app-status-info);
+    background: var(--app-status-info-bg);
+    border: 1px solid var(--app-status-info-border);
+  }
+
+  /* 결재선 타임라인 */
+  .app-timeline-line {
+    position: absolute;
+    left: 15px;
+    top: 32px;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+
+  .app-timeline-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 2px solid var(--border);
+    background: var(--card);
+    position: relative;
+    z-index: 1;
+  }
+
+  .app-timeline-dot[data-status="pending"] {
+    border-color: var(--app-status-pending);
+    color: var(--app-status-pending);
+  }
+
+  .app-timeline-dot[data-status="approved"] {
+    border-color: var(--app-status-approved);
+    background: var(--app-status-approved);
+    color: white;
+  }
+
+  .app-timeline-dot[data-status="rejected"] {
+    border-color: var(--app-status-rejected);
+    background: var(--app-status-rejected);
+    color: white;
+  }
+
+  .app-timeline-dot[data-status="cancelled"] {
+    border-color: var(--app-status-cancelled);
+    color: var(--app-status-cancelled);
+  }
+
+  /* AI 타이핑 애니메이션 */
+  .app-ai-typing-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--app-brand-primary);
+    animation: app-ai-bounce 1.4s ease-in-out infinite both;
+  }
+
+  .app-ai-typing-dot:nth-child(1) {
+    animation-delay: -0.32s;
+  }
+
+  .app-ai-typing-dot:nth-child(2) {
+    animation-delay: -0.16s;
+  }
+
+  .app-ai-typing-dot:nth-child(3) {
+    animation-delay: 0s;
+  }
+
+  /* AI 소스 카드 */
+  .app-ai-source-card {
+    background: var(--app-surface-raised);
+    border: 1px solid var(--border);
+    border-radius: var(--app-radius-md);
+    padding: var(--app-space-sm) var(--app-space-md);
+    transition: border-color var(--app-transition-fast);
+  }
+
+  .app-ai-source-card:hover {
+    border-color: var(--app-brand-primary);
+  }
+
+  /* 표면 유틸리티 */
+  .app-surface-raised {
+    background: var(--app-surface-raised);
+  }
+
+  .app-surface-sunken {
+    background: var(--app-surface-sunken);
+  }
+}
+
+/* ==========================================================================
+   키프레임
+   ========================================================================== */
+
+@keyframes app-ai-bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes app-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes app-slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes app-pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Environment files (contain secrets — never commit)
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+
+# OMC workspace
+.omc/
+_workspace/

@@ -32,6 +32,8 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan,
     docs_url="/docs" if settings.DEBUG else None,
+    # trailing slash redirect 비활성화 — 프록시 환경에서 http:// redirect 문제 방지
+    redirect_slashes=False,
 )
 
 app.state.limiter = limiter

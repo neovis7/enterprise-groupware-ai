@@ -7,10 +7,10 @@
 import axios from 'axios';
 import { getSession, signOut } from 'next-auth/react';
 
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000';
+
 export const apiClient = axios.create({
-  // 상대 경로 사용 → Next.js 프록시(next.config.ts rewrite)를 통해 Railway로 전달
-  // CORS 없음, NEXT_PUBLIC_API_URL 빌드 타임 의존 없음
-  baseURL: '',
+  baseURL: BASE_URL,
   headers: { 'Content-Type': 'application/json' },
   withCredentials: true,
 });

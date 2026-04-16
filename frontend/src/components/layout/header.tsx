@@ -39,7 +39,7 @@ export function Header({ title, onMenuToggle, isSidebarOpen }: HeaderProps) {
   };
 
   return (
-    <header className="sticky top-0 z-[90] flex h-16 items-center gap-4 border-b border-border/50 px-4 app-glass-card rounded-none">
+    <header className="sticky top-0 z-[90] flex h-16 items-center gap-4 border-b border-white/60 px-4 bg-white/70 backdrop-blur-md rounded-none shadow-sm">
       {/* 모바일 햄버거 */}
       <button
         onClick={onMenuToggle}

@@ -42,7 +42,7 @@ export function AppLayout({ children }: AppLayoutProps) {
   const title = getTitle(pathname);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50/60 to-indigo-100/80">
       <Sidebar
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}

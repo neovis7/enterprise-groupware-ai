@@ -103,23 +103,23 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       <aside
         className={cn(
           'fixed top-0 left-0 h-full w-64 z-[110] flex flex-col',
-          'app-glass-card rounded-none border-r border-border/50',
+          'bg-slate-900 rounded-none border-r border-slate-700/60',
           'transition-transform duration-300 ease-in-out',
           isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0',
         )}
         aria-label="사이드바 내비게이션"
       >
         {/* 로고 */}
-        <div className="flex h-16 items-center px-5 border-b border-border/50 flex-shrink-0">
-          <Link href="/dashboard" className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded">
-            <span className="text-xl font-bold text-primary">GroupWare</span>
-            <span className="text-xs px-1.5 py-0.5 rounded bg-primary/10 text-primary font-medium">AI</span>
+        <div className="flex h-16 items-center px-5 border-b border-slate-700/60 flex-shrink-0">
+          <Link href="/dashboard" className="flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 rounded">
+            <span className="text-xl font-bold text-white">GroupWare</span>
+            <span className="text-xs px-1.5 py-0.5 rounded bg-indigo-500/30 text-indigo-300 font-semibold">AI</span>
           </Link>
         </div>
 
         {/* 네비게이션 */}
         <nav className="flex-1 overflow-y-auto py-4 px-3" aria-label="메인 메뉴">
-          <ul className="space-y-1" role="list">
+          <ul className="space-y-0.5" role="list">
             {NAV_ITEMS.filter(isAllowed).map((item) => (
               <li key={item.href}>
                 <Link
@@ -127,10 +127,10 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                   onClick={() => onClose()}
                   aria-current={isActive(item.href) ? 'page' : undefined}
                   className={cn(
-                    'flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+                    'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
                     isActive(item.href)
-                      ? 'bg-primary/10 text-primary'
-                      : 'text-foreground/70 hover:bg-accent hover:text-foreground',
+                      ? 'bg-indigo-600 text-white shadow-sm'
+                      : 'text-slate-400 hover:bg-slate-700/60 hover:text-slate-100',
                   )}
                 >
                   <item.icon className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
@@ -139,7 +139,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
 
                 {/* 하위 메뉴 */}
                 {item.children && isActive(item.href) && (
-                  <ul className="mt-1 ml-4 space-y-1 pl-3 border-l border-border" role="list">
+                  <ul className="mt-1 ml-4 space-y-0.5 pl-3 border-l border-slate-700" role="list">
                     {item.children.filter(isAllowed).map((child) => (
                       <li key={child.href}>
                         <Link
@@ -149,8 +149,8 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                           className={cn(
                             'flex items-center gap-2 rounded-md px-2 py-1.5 text-xs font-medium transition-colors',
                             pathname === child.href
-                              ? 'text-primary'
-                              : 'text-muted-foreground hover:text-foreground hover:bg-accent',
+                              ? 'text-indigo-300 bg-indigo-500/10'
+                              : 'text-slate-500 hover:text-slate-200 hover:bg-slate-700/50',
                           )}
                         >
                           <child.icon className="h-3.5 w-3.5" aria-hidden="true" />
@@ -167,16 +167,16 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
 
         {/* 사용자 정보 */}
         {user && (
-          <div className="border-t border-border/50 px-4 py-3 flex-shrink-0">
+          <div className="border-t border-slate-700/60 px-4 py-3 flex-shrink-0">
             <div className="flex items-center gap-3">
-              <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                <span className="text-xs font-semibold text-primary" aria-hidden="true">
+              <div className="h-8 w-8 rounded-full bg-indigo-600 flex items-center justify-center flex-shrink-0">
+                <span className="text-xs font-bold text-white" aria-hidden="true">
                   {user.name?.slice(0, 1) ?? '?'}
                 </span>
               </div>
               <div className="min-w-0">
-                <p className="text-sm font-medium text-foreground truncate">{user.name}</p>
-                <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+                <p className="text-sm font-medium text-slate-100 truncate">{user.name}</p>
+                <p className="text-xs text-slate-400 truncate">{user.email}</p>
               </div>
             </div>
           </div>

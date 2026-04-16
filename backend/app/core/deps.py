@@ -3,7 +3,7 @@ import logging
 from typing import Annotated
 
 import redis.asyncio as aioredis
-from fastapi import Cookie, Depends, HTTPException, status
+from fastapi import Cookie, Depends, Header, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -30,6 +30,7 @@ async def get_redis() -> aioredis.Redis:
 
 async def get_current_user(
     db: Annotated[AsyncSession, Depends(get_db)],
+    authorization: Annotated[str | None, Header()] = None,
     access_token: Annotated[str | None, Cookie()] = None,
 ) -> "UserModel":
     # import here to avoid circular
@@ -40,10 +41,18 @@ async def get_current_user(
         detail="인증 정보가 유효하지 않습니다.",
         headers={"WWW-Authenticate": "Bearer"},
     )
-    if not access_token:
+
+    # Accept JWT from Authorization: Bearer header or access_token cookie
+    token: str | None = None
+    if authorization and authorization.startswith("Bearer "):
+        token = authorization.removeprefix("Bearer ")
+    elif access_token:
+        token = access_token
+
+    if not token:
         raise credentials_exc
 
-    payload = verify_token(access_token, token_type="access")
+    payload = verify_token(token, token_type="access")
     if payload is None:
         raise credentials_exc
 

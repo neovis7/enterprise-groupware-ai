@@ -13,7 +13,7 @@ export function useMessageRooms() {
   return useQuery({
     queryKey: KEYS.rooms,
     queryFn: async () => {
-      const { data } = await apiClient.get('/api/messages/rooms');
+      const { data } = await apiClient.get('/api/messages/rooms/');
       return data?.data ?? [];
     },
   });
@@ -35,7 +35,7 @@ export function useSendMessage() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async (payload: CreateMessage) => {
-      const { data } = await apiClient.post('/api/messages', payload);
+      const { data } = await apiClient.post('/api/messages/', payload);
       return data?.data;
     },
     onSuccess: (_data, variables) => {

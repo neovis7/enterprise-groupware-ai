@@ -33,7 +33,7 @@ export function useProjects() {
   return useQuery({
     queryKey: KEYS.all,
     queryFn: async () => {
-      const { data } = await apiClient.get('/api/projects');
+      const { data } = await apiClient.get('/api/projects/');
       return data?.data ?? [];
     },
   });
@@ -54,7 +54,7 @@ export function useCreateProject() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async (payload: CreateProject) => {
-      const { data } = await apiClient.post('/api/projects', payload);
+      const { data } = await apiClient.post('/api/projects/', payload);
       return data?.data;
     },
     onSuccess: () => {

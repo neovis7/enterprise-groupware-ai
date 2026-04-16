@@ -13,7 +13,7 @@ export function useDepartments() {
   return useQuery({
     queryKey: KEYS.all,
     queryFn: async () => {
-      const { data } = await apiClient.get('/api/departments');
+      const { data } = await apiClient.get('/api/departments/');
       return data?.data ?? [];
     },
   });
@@ -23,7 +23,7 @@ export function useCreateDepartment() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async (payload: CreateDepartment) => {
-      const { data } = await apiClient.post('/api/departments', payload);
+      const { data } = await apiClient.post('/api/departments/', payload);
       return data?.data;
     },
     onSuccess: () => {

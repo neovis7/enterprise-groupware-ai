@@ -15,7 +15,7 @@ export function useApprovals(params?: { status?: 'mine' | 'pending'; assignee?: 
   return useQuery({
     queryKey: params?.status === 'pending' ? KEYS.pending() : KEYS.mine(),
     queryFn: async () => {
-      const { data } = await apiClient.get('/api/approvals', { params });
+      const { data } = await apiClient.get('/api/approvals/', { params });
       return data?.data ?? [];
     },
   });
@@ -36,7 +36,7 @@ export function useCreateApproval() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async (payload: CreateApproval) => {
-      const { data } = await apiClient.post('/api/approvals', payload);
+      const { data } = await apiClient.post('/api/approvals/', payload);
       return data?.data;
     },
     onSuccess: () => {

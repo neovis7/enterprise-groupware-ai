@@ -12,7 +12,7 @@ export function useFolders() {
   return useQuery({
     queryKey: KEYS.folders,
     queryFn: async () => {
-      const { data } = await apiClient.get('/api/folders');
+      const { data } = await apiClient.get('/api/folders/');
       return data?.data ?? [];
     },
   });
@@ -22,7 +22,7 @@ export function useFiles(folderId?: string) {
   return useQuery({
     queryKey: KEYS.files(folderId),
     queryFn: async () => {
-      const { data } = await apiClient.get('/api/files', {
+      const { data } = await apiClient.get('/api/files/', {
         params: folderId ? { folderId } : undefined,
       });
       return data?.data ?? [];
@@ -38,7 +38,7 @@ export function useUploadFile() {
       formData.append('file', file);
       if (folderId) formData.append('folderId', folderId);
 
-      const { data } = await apiClient.post('/api/files', formData, {
+      const { data } = await apiClient.post('/api/files/', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       return data?.data;

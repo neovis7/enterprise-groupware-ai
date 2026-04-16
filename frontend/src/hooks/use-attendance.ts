@@ -19,7 +19,7 @@ export function useAttendance(year: number, month: number) {
   return useQuery({
     queryKey: KEYS.attendance(year, month),
     queryFn: async () => {
-      const { data } = await apiClient.get('/api/attendance', { params: { year, month } });
+      const { data } = await apiClient.get('/api/attendance/', { params: { year, month } });
       return data?.data ?? [];
     },
   });
@@ -57,7 +57,7 @@ export function useLeaves() {
   return useQuery({
     queryKey: KEYS.leaves,
     queryFn: async () => {
-      const { data } = await apiClient.get('/api/leaves');
+      const { data } = await apiClient.get('/api/leaves/');
       return data?.data ?? [];
     },
   });
@@ -67,7 +67,7 @@ export function useCreateLeave() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async (payload: CreateLeave) => {
-      const { data } = await apiClient.post('/api/leaves', payload);
+      const { data } = await apiClient.post('/api/leaves/', payload);
       return data?.data;
     },
     onSuccess: () => {

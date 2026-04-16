@@ -13,7 +13,7 @@ export function useUsers() {
   return useQuery({
     queryKey: KEYS.all,
     queryFn: async () => {
-      const { data } = await apiClient.get('/api/users');
+      const { data } = await apiClient.get('/api/users/');
       return data?.data ?? [];
     },
   });
@@ -34,7 +34,7 @@ export function useCreateUser() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async (payload: CreateUser) => {
-      const { data } = await apiClient.post('/api/users', payload);
+      const { data } = await apiClient.post('/api/users/', payload);
       return data?.data;
     },
     onSuccess: () => {

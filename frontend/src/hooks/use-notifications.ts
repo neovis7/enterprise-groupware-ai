@@ -11,7 +11,7 @@ export function useNotifications() {
   return useQuery({
     queryKey: KEYS.all,
     queryFn: async () => {
-      const { data } = await apiClient.get('/api/notifications');
+      const { data } = await apiClient.get('/api/notifications/');
       return data?.data ?? [];
     },
     refetchInterval: 30000, // 30초 폴링

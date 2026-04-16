@@ -15,7 +15,7 @@ export function useAISessions() {
   return useQuery({
     queryKey: KEYS.sessions,
     queryFn: async () => {
-      const { data } = await apiClient.get('/api/ai/sessions');
+      const { data } = await apiClient.get('/api/ai/sessions/');
       return data ?? [];
     },
   });
@@ -25,7 +25,7 @@ export function useCreateAISession() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async () => {
-      const { data } = await apiClient.post('/api/ai/sessions');
+      const { data } = await apiClient.post('/api/ai/sessions/');
       // 백엔드가 { sessionId } 또는 { id } 중 어느 형태로 반환하더라도
       // 항상 id 필드를 보장하여 페이지 코드가 session?.id 로 접근할 수 있게 정규화
       const sessionId = (data as { sessionId?: string; id?: string } | null)?.sessionId;

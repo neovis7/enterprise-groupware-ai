@@ -14,7 +14,7 @@ export function usePosts(params?: { type?: string; page?: number }) {
   return useQuery({
     queryKey: KEYS.list(params),
     queryFn: async () => {
-      const { data } = await apiClient.get('/api/posts', { params });
+      const { data } = await apiClient.get('/api/posts/', { params });
       return data?.data ?? [];
     },
   });
@@ -35,7 +35,7 @@ export function useCreatePost() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async (payload: CreatePost) => {
-      const { data } = await apiClient.post('/api/posts', payload);
+      const { data } = await apiClient.post('/api/posts/', payload);
       return data?.data;
     },
     onSuccess: () => {

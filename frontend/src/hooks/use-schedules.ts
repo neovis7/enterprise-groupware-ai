@@ -14,7 +14,7 @@ export function useSchedules(year: number, month: number) {
   return useQuery({
     queryKey: KEYS.list(year, month),
     queryFn: async () => {
-      const { data } = await apiClient.get('/api/schedules', { params: { year, month } });
+      const { data } = await apiClient.get('/api/schedules/', { params: { year, month } });
       return data?.data ?? [];
     },
   });
@@ -35,7 +35,7 @@ export function useCreateSchedule() {
   const qc = useQueryClient();
   return useMutation({
     mutationFn: async (payload: CreateSchedule) => {
-      const { data } = await apiClient.post('/api/schedules', payload);
+      const { data } = await apiClient.post('/api/schedules/', payload);
       return data?.data;
     },
     onSuccess: () => {
